@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Lista de Pendientes</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f1ea;
+            color: #25231f;
+        }
+
+        header {
+            background: #26221d;
+            color: white;
+            padding: 34px 20px;
+        }
+
+        header .contenido {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: 32px;
+        }
+
+        header p {
+            margin: 0;
+            color: #d8d0c5;
+        }
+
+        main {
+            width: min(980px, 92%);
+            margin: 30px auto 50px;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #ddd5ca;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 20px rgba(0,0,0,.05);
+        }
+
+        .formulario {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        input, select, button {
+            font: inherit;
+        }
+
+        input, select {
+            border: 1px solid #cfc5b8;
+            border-radius: 10px;
+            padding: 11px 12px;
+            background: white;
+        }
+
+        #nuevaTarea {
+            flex: 1 1 320px;
+        }
+
+        #buscador {
+            width: 100%;
+            margin-top: 14px;
+        }
+
+        button {
+            border: 0;
+            border-radius: 10px;
+            padding: 11px 16px;
+            cursor: pointer;
+            background: #315c4c;
+            color: white;
+        }
+
+        button:hover {
+            opacity: .9;
+        }
+
+        .encabezado-lista {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .encabezado-lista h2 {
+            margin: 0;
+        }
+
+        #contador {
+            margin: 0;
+            color: #71685e;
+        }
+
+        #listaTareas {
+            display: grid;
+            gap: 12px;
+        }
+
+        .tarea {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #e2dbd2;
+            border-radius: 12px;
+            background: #faf9f6;
+        }
+
+        .tarea-info {
+            flex: 1;
+        }
+
+        .tarea-info strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .tarea-info small {
+            color: #81786d;
+        }
+
+        .completada strong {
+            text-decoration: line-through;
+            color: #8b8176;
+        }
+
+        .acciones {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .btn-secundario {
+            background: #8c674b;
+        }
+
+        .btn-eliminar {
+            background: #aa4037;
+        }
+
+        .vacio, .error, .cargando {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 12px;
+            background: #faf9f6;
+        }
+
+        .error {
+            color: #aa4037;
+        }
+
+        @media (max-width: 650px) {
+            .tarea {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .acciones {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="contenido">
+            <h1> Mi lista de pendientes</h1>
+        
+        </div>
+    </header>
+
+    <main>
+        <section class="panel">
+            <form id="formularioTarea" class="formulario">
+                <input id="nuevaTarea" type="text" placeholder="Escribe una tarea" maxlength="80" required>
+                <select id="prioridad">
+                    <option value="Alta">Alta</option>
+                    <option value="Media" selected>Media</option>
+                    <option value="Baja">Baja</option>
+                </select>
+                <button type="submit">Agregar tarea</button>
+            </form>
+
+            <input id="buscador" type="search" placeholder="Buscar una tarea...">
+        </section>
+
+        <section class="panel">
+            <div class="encabezado-lista">
+                <h2>Mis pendientes</h2>
+                <p id="contador">0 tareas</p>
+            </div>
+
+            <div id="estadoInicial" class="cargando">Cargando tareas...</div>
+            <section id="listaTareas" hidden></section>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
